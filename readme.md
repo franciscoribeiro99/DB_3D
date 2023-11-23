@@ -1,10 +1,10 @@
 # 3D printing order
 
-Il s’agit d’une entreprise qui fais des impressions 3D pour ces clients en laissant passer des commandes en ligne
+Il s’agit d’une entreprise qui fait des impressions 3D pour ces clients en laissant passer des commandes en ligne.
 
-Il permet d’imprimer d’imprimer en filament (FDM) et résine. Plusieurs types de filament ou de résine.
+Il permet d’imprimer en filament (FDM) et/ou résine. Plusieurs types de filament ou de résine sont disponibles en différentes couleurs.
 
-Il faut faire intention car une FDM ne peut pas imprimer avec de la résiné. Le prix est calculé en fonction de la taille du fichier donné.
+Il faut faire intention car une FDM ne peut pas imprimer avec de la résine. Le prix est calculé en fonction de la taille du fichier donné et du matériau choisi.
 
 - **Client** {CustomerID, fname, lname, address, zip, city}
 - **Commande** {OrderId, CustomerID, ProductTable, FinalPrice}
@@ -13,15 +13,15 @@ Il faut faire intention car une FDM ne peut pas imprimer avec de la résiné. Le
 - **Filament** {FilamentID, name, price, color, stock}
 - **Résine** {ResinID, name, price, color, stock}
 
-### **Règles Métier et Contraintes**
+![3D.png](..%2F..%2FDownloads%2F3D.png)
+
+### **Règles Métier s**
 
 - Compatibilité: Imprimante-Filament/Résine (FDM pour filament, pas pour résine)
 - Prix: Calculé selon taille du produit
 
-### **Relations entre Tables**
-
-- **Commande** → **Client**: Clé étrangère (CustomerID)
-- **Commande** → **Produit**: Clé étrangère (ProductID)
+### **Challenges**
+- Les liens entre les produits qui sont liés 
 
 ### **Fonctionnalités**
 
