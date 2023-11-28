@@ -6,16 +6,17 @@ Il permet d’imprimer en filament (FDM) et/ou résine. Plusieurs types de filam
 
 Il faut faire intention car une FDM ne peut pas imprimer avec de la résine. Le prix est calculé en fonction de la taille du fichier donné et du matériau choisi.
 
-- **Client** {CustomerID, fname, lname, address, zip, city}
-- **Commande** {OrderId, CustomerID, ProductTable, FinalPrice}
-- **Produit** {ProductID, sizeX, sizeY, sizeZ}
-- **Imprimante** {PrinterID, name, PrintType, printX, printY, printZ}
-- **Filament** {FilamentID, name, price, color, stock}
-- **Résine** {ResinID, name, price, color, stock}
+- **Customer** {CustomerID, fname, lname, address, zip, city}
+- **OrderS** {OrderId, CustomerID, ProductTable, FinalPrice}
+- **OrderItems** {OrderId, ProductID, MaterialID, Quantity}
+- **Products** {ProductID, name, sizeX, sizeY, sizeZ}
+- **Printers** {PrinterID, name, PrintType, printX, printY, printZ}
+- **Material** { MaterialID, name, price, color, stock}
+- **PrinterMaterialCompatibility** {PrinterID, MaterialID}
 
-![3D.png](3D.png)
+<iframe width="560" height="315" src='https://dbdiagram.io/e/655f5db43be149578799ec1f/6565c4953be1495787e1cb65'> </iframe>
 
-### **Règles Métier s**
+### **Règles Métier**
 
 - Compatibilité: Imprimante-Filament/Résine (FDM pour filament, pas pour résine)
 - Prix: Calculé selon taille du produit
