@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DISTANT_DATABASE")
+}
+
+model Customer {
+  CustomerID Int      @id @unique @default(autoincrement())
+  fname      String
+  lname      String
+  email      String
+  address    String
+  zip        Int
+  city       String
+  Order      OrderS[]
+}
+
+model OrderS {
+  OrderId    Int
+  CustomerID Int
+  FinalPrice Int
+  Customer   Customer @relation(fields: [CustomerID], references: [CustomerID])
+
+  @@unique([OrderId, CustomerID], name: "OrderIdentifier")
+}
+
+model Material {
+  MaterialID                   Int                            @id @unique @default(autoincrement())
+  name                         String
+  price                        Int
+  color                        String
+  stock                        Int
+  MaterialType                 String
+  PrintersCompatible PrinterMaterialCompatibility[]
+}
+
+model Printers {
+  PrinterID                    Int                            @id @unique @default(autoincrement())
+  name                         String
+  PrintType                    String
+  printX                       Int
+  printY                       Int
+  printZ                       Int
+  MaterialCompatible PrinterMaterialCompatibility[]
+}
+
+model PrinterMaterialCompatibility {
+  PrinterID  Int
+  MaterialID Int
+  Material   Material @relation(fields: [MaterialID], references: [MaterialID])
+  Printer    Printers @relation(fields: [PrinterID], references: [PrinterID])
+
+  @@unique([PrinterID, MaterialID], name: "PrinterMaterialIdentifier")
+}

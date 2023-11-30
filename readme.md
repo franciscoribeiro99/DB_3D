@@ -22,7 +22,6 @@ Il faut faire intention car une FDM ne peut pas imprimer avec de la résine. Le 
 - Prix: Calculé selon taille du produit
 
 ### **Challenges**
-
 - Les liens entre les produits qui sont liés 
 
 ### **Fonctionnalités**
