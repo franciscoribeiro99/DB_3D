@@ -14,7 +14,7 @@ Il faut faire intention car une FDM ne peut pas imprimer avec de la résine. Le 
 - **Material** { MaterialID, name, price, color, stock}
 - **PrinterMaterialCompatibility** {PrinterID, MaterialID}
 
-<iframe width="560" height="315" src='https://dbdiagram.io/e/655f5db43be149578799ec1f/6565c4953be1495787e1cb65'> </iframe>
+![DB Schema](3D.png)
 
 ### **Règles Métier**
 
@@ -22,6 +22,7 @@ Il faut faire intention car une FDM ne peut pas imprimer avec de la résine. Le 
 - Prix: Calculé selon taille du produit
 
 ### **Challenges**
+
 - Les liens entre les produits qui sont liés 
 
 ### **Fonctionnalités**
