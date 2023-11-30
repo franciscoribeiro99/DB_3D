@@ -28,3 +28,11 @@ Il faut faire intention car une FDM ne peut pas imprimer avec de la résine. Le 
 
 - Calcul du prix: Basé sur dimensions et matériau
 - Vérification de compatibilité: Imprimante et matériau
+
+## Installation et lancement
+
+Pour installer les paquets nécessaires : `npm i`
+
+Pour générer les données prisma : `npm run generate`
+
+Pour lancer un script : `npm run start -- <chemin du fichier>` ou `npx ts-node <chemin du fichier>`
