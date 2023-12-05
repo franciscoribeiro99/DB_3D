@@ -17,16 +17,18 @@ model Customer {
   address    String
   zip        Int
   city       String
-  order      OrderS[]
+  order      Order[]
+  @@map("customer")
 }
 
-model OrderS {
-  orderid    Int
+model Order {
+  orderid    Int    @id @unique @default(autoincrement())
   customerid Int
   finalprice Int
   customer   Customer @relation(fields: [customerid], references: [customerid])
 
   @@unique([orderid, customerid], name: "OrderIdentifier")
+@@map("orders")
 }
 
 model Material {
@@ -36,7 +38,8 @@ model Material {
   color                        String
   stock                        Int
   materitype                 String
-  printerscompatibility PrinterMaterialCompatibility[]
+  printerscompatibility PrinterMaterialcompatibility[]
+  @@map("material")
 }
 
 model Printers {
@@ -46,14 +49,16 @@ model Printers {
   printx                       Int
   printy                       Int
   printz                       Int
-  materialcompatible PrinterMaterialCompatibility[]
+  materialcompatible PrinterMaterialcompatibility[]
+  @@map("printers")
 }
 
-model PrinterMaterialCompatibility {
+model PrinterMaterialcompatibility {
   printerid  Int
   materialid Int
   material   Material @relation(fields: [materialid], references: [materialid])
   printer    Printers @relation(fields: [printerid], references: [printerid])
 
   @@unique([printerid, materialid], name: "PrinterMaterialIdentifier")
+  @@map("printermaterialcompatibility")
 }
