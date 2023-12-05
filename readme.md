@@ -14,7 +14,7 @@ Il faut faire intention car une FDM ne peut pas imprimer avec de la résine. Le 
 - **Material** { MaterialID, name, price, color, stock}
 - **PrinterMaterialCompatibility** {PrinterID, MaterialID}
 
-![DB Schema](3D.png)
+![DB Schema](./static/3D.png)
 
 ### **Règles Métier**
 

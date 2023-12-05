@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// If you update this, you need to run "npm run generate" to regenerate prisma auto completion
 
 generator client {
   provider = "prisma-client-js"
