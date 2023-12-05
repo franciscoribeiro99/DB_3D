@@ -10,50 +10,50 @@ datasource db {
 }
 
 model Customer {
-  CustomerID Int      @id @unique @default(autoincrement())
+  customerid Int      @id @unique @default(autoincrement())
   fname      String
   lname      String
   email      String
   address    String
   zip        Int
   city       String
-  Order      OrderS[]
+  order      OrderS[]
 }
 
 model OrderS {
-  OrderId    Int
-  CustomerID Int
-  FinalPrice Int
-  Customer   Customer @relation(fields: [CustomerID], references: [CustomerID])
+  orderid    Int
+  customerid Int
+  finalprice Int
+  customer   Customer @relation(fields: [customerid], references: [customerid])
 
-  @@unique([OrderId, CustomerID], name: "OrderIdentifier")
+  @@unique([orderid, customerid], name: "OrderIdentifier")
 }
 
 model Material {
-  MaterialID                   Int                            @id @unique @default(autoincrement())
+  materialid                   Int                            @id @unique @default(autoincrement())
   name                         String
   price                        Int
   color                        String
   stock                        Int
-  MaterialType                 String
-  PrintersCompatible PrinterMaterialCompatibility[]
+  materitype                 String
+  printerscompatibility PrinterMaterialCompatibility[]
 }
 
 model Printers {
-  PrinterID                    Int                            @id @unique @default(autoincrement())
+  printerid                    Int                            @id @unique @default(autoincrement())
   name                         String
-  PrintType                    String
-  printX                       Int
-  printY                       Int
-  printZ                       Int
-  MaterialCompatible PrinterMaterialCompatibility[]
+  printertype                    String
+  printx                       Int
+  printy                       Int
+  printz                       Int
+  materialcompatible PrinterMaterialCompatibility[]
 }
 
 model PrinterMaterialCompatibility {
-  PrinterID  Int
-  MaterialID Int
-  Material   Material @relation(fields: [MaterialID], references: [MaterialID])
-  Printer    Printers @relation(fields: [PrinterID], references: [PrinterID])
+  printerid  Int
+  materialid Int
+  material   Material @relation(fields: [materialid], references: [materialid])
+  printer    Printers @relation(fields: [printerid], references: [printerid])
 
-  @@unique([PrinterID, MaterialID], name: "PrinterMaterialIdentifier")
+  @@unique([printerid, materialid], name: "PrinterMaterialIdentifier")
 }
