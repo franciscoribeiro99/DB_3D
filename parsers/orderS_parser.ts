@@ -1,12 +1,12 @@
 import { getCSV } from "../tools/CSVParser";
-import { PrismaClient, OrderS } from '@prisma/client'
+import { PrismaClient, Order } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 async function main() {
     const res = await getCSV("./data/orderS_data.csv", ";")
     //console.log(res)
-    const toAdd: OrderS[] = []
+    const toAdd: Order[] = []
     for (const elem of res){
       elem[0] = parseInt(elem[0])
       elem[1] = parseDate(elem[1])
@@ -15,9 +15,9 @@ async function main() {
       elem[4] = parseInt(elem[4])
       console.log(elem)
       toAdd.push({
-          OrderId: elem[0],
-          CustomerID: elem[3],
-          FinalPrice: elem[4]
+          orderid: elem[0],
+          customerid: elem[3],
+          finalprice: elem[4]
       })
     }
 }
