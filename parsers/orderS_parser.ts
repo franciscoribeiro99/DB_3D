@@ -20,6 +20,10 @@ async function main() {
           finalprice: elem[4]
       })
     }
+
+    await prisma.order.createMany({
+      data: toAdd
+  })
 }
 
 function parseDate(input:String) {

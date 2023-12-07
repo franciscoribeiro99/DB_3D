@@ -23,8 +23,11 @@ model Customer {
 
 model Order {
   orderid    Int    @id @unique @default(autoincrement())
+  orderdate  DateTime
+  datecompleted DateTime
   customerid Int
   finalprice Int
+  status     String
   customer   Customer @relation(fields: [customerid], references: [customerid])
 
   @@unique([orderid, customerid], name: "OrderIdentifier")
