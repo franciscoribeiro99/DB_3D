@@ -13,7 +13,7 @@ async function main() {
         const lname = t[2]
         const mail = t[3]
         const address = t[4]
-        const zip = t[5]
+        const zip = parseInt(t[5])
         const city = t[6]
         data.push({
             fname,
@@ -27,7 +27,6 @@ async function main() {
     await prisma.customer.createMany({
         data: data
     })
-    console.log(res)
 }
 
 main();
