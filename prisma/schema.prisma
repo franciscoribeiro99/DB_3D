@@ -9,50 +9,70 @@ datasource db {
   url      = env("DISTANT_DATABASE")
 }
 
+model City {
+  cityid   Int        @id @unique @default(autoincrement())
+  city     String
+  zip      Int
+  Customer Customer[]
+
+  @@unique([city, zip], name: "CityZipUnique")
+  @@map("city")
+}
+
 model Customer {
-  customerid Int      @id @unique @default(autoincrement())
+  customerid Int     @id @unique @default(autoincrement())
   fname      String
   lname      String
   email      String
   address    String
-  zip        Int
-  city       String
+  cityid     Int
+  city       City    @relation(fields: [cityid], references: [cityid])
   order      Order[]
+
   @@map("customer")
 }
 
+model Status {
+  statusid Int     @id @unique @default(autoincrement())
+  status   String
+  Order    Order[]
+}
+
 model Order {
-  orderid    Int    @id @unique @default(autoincrement())
+  orderid    Int      @id @unique @default(autoincrement())
+  statusid   Int
+  status     Status   @relation(fields: [statusid], references: [statusid])
   orderdate  DateTime
-  datecompleted DateTime
+  datecompleted DateTime?
   customerid Int
   finalprice Int
-  status     String
   customer   Customer @relation(fields: [customerid], references: [customerid])
 
   @@unique([orderid, customerid], name: "OrderIdentifier")
-@@map("orders")
+  @@map("orders")
 }
 
 model Material {
-  materialid                   Int                            @id @unique @default(autoincrement())
-  name                         String
-  price                        Int
-  color                        String
-  stock                        Int
-  materitype                 String
+  materialid            Int                            @id @unique @default(autoincrement())
+  name                  String
+  price                 Int
+  color                 String
+  stock                 Int
+  materitype            String
   printerscompatibility PrinterMaterialcompatibility[]
+
   @@map("material")
 }
 
 model Printers {
-  printerid                    Int                            @id @unique @default(autoincrement())
-  name                         String
-  printertype                    String
-  printx                       Int
-  printy                       Int
-  printz                       Int
+  printerid          Int                            @id @unique @default(autoincrement())
+  name               String
+  printertype        String
+  printx             Int
+  printy             Int
+  printz             Int
   materialcompatible PrinterMaterialcompatibility[]
+
   @@map("printers")
 }
 

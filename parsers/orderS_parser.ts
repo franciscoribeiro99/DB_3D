@@ -13,11 +13,15 @@ async function main() {
       elem[2] = parseDate(elem[2])
       elem[3] = parseInt(elem[3])
       elem[4] = parseInt(elem[4])
-      console.log(elem)
+      elem[5] = parseInt(elem[5])
+      //console.log(elem[2])
       toAdd.push({
           orderid: elem[0],
+          orderdate: elem[1],
+          datecompleted: elem[2],
           customerid: elem[3],
-          finalprice: elem[4]
+          finalprice: elem[4],
+          statusid: elem[5]
       })
     }
 
@@ -26,7 +30,7 @@ async function main() {
   })
 }
 
-function parseDate(input:String) {
+function parseDate(input:String):Date|null {
   if(input == ""){
     return null
   }
