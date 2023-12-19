@@ -58,8 +58,10 @@ async function pickProduct(): Promise<Product> {
 
 async function pickPrinter(prod: Product, mat: Material): Promise<Printers> {
 	const disp = await getPrinters(prisma, prod, mat)
+	if (disp.length == 0) {
+		console.log("Là c'est la merde, c'est trop gros mec")
+	}
 	return disp[0]
-
 }
 
 async function pickMaterial(): Promise<Material> {
@@ -67,7 +69,7 @@ async function pickMaterial(): Promise<Material> {
 	let done = false
 	let finalMat:Material = mats[0]
 	while(!done) {
-		let toPrint = ""
+		let toPrint = "\n"
 		for(let i = 0; i < mats.length;i++) {
 			toPrint += i + " : " + mats[i].name + " " + mats[i].color + "\n"
 		}
@@ -84,14 +86,16 @@ async function pickMaterial(): Promise<Material> {
 }
 
 async function main() {
-	const tarace = await createUser()
+	const customer = await createUser()
 	const prod = await pickProduct()
 	const quantity = parseInt(await inter.question("How many of them would you like ? \n"))
 	const material = await pickMaterial()
 	const data = {
-		customerid: tarace.customerid,
-		finalprice: 10,
-		statusid: 0
+		orderid: 150,
+		customerid: customer.customerid,
+		finalprice: 0,
+		statusid: 1,
+		orderdate: new Date()
 	}
 	const order = await prisma.order.create({
 		data
@@ -106,7 +110,15 @@ async function main() {
 			productid: prod.productid
 		}
 	})
-	console.log("Order item has id : ", orderitem.orderid)
+	const res = await prisma.order.update({
+		where: {
+			orderid: order.orderid
+		},
+		data: {
+			finalprice: orderitem.quantity * (prod.sizex + prod.sizey + prod.sizez)
+		}
+	});
+	console.log("Your order will cost you : ", res.finalprice)
 }
 
 

@@ -94,14 +94,14 @@ model Material {
 model Printers {
   printerid          Int                            @id @unique @default(autoincrement())
   name               String
-  printertypeid      Int
-  printertype        PrintType                      @relation(fields: [printertypeid], references: [printtypeid])
+  printtype      Int
+  printertype        PrintType                      @relation(fields: [printtype], references: [printtypeid])
   printx             Int
   printy             Int
   printz             Int
   materialcompatible PrinterMaterialcompatibility[]
 
-  @@map("printers")
+  @@map("printer")
 }
 
 model PrintType {
