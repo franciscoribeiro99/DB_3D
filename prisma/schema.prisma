@@ -9,6 +9,17 @@ datasource db {
   url      = env("DISTANT_DATABASE")
 }
 
+model Product {
+  productid Int         @id @unique @default(autoincrement())
+  name      String
+  sizex     Int
+  sizey     Int
+  sizez     Int
+  OrderItem OrderItem[]
+
+  @@map("product")
+}
+
 model City {
   cityid   Int        @id @unique @default(autoincrement())
   city     String
@@ -23,7 +34,7 @@ model Customer {
   customerid Int     @id @unique @default(autoincrement())
   fname      String
   lname      String
-  email      String
+  email      String  @unique
   address    String
   cityid     Int
   city       City    @relation(fields: [cityid], references: [cityid])
@@ -38,13 +49,28 @@ model Status {
   Order    Order[]
 }
 
+model OrderItem {
+  orderid    Int
+  order      Order    @relation(fields: [orderid], references: [orderid])
+  productid  Int
+  product    Product  @relation(fields: [productid], references: [productid])
+  materialid Int
+  material   Material @relation(fields: [materialid], references: [materialid])
+  printerid  Int
+  quantity   Int
+
+  @@unique([orderid, printerid, productid, materialid])
+  @@map("orderitem")
+}
+
 model Order {
-  orderid    Int      @id @unique @default(autoincrement())
+  orderid    Int         @id @unique @default(autoincrement())
   statusid   Int
-  status     Status   @relation(fields: [statusid], references: [statusid])
+  status     Status      @relation(fields: [statusid], references: [statusid])
   customerid Int
   finalprice Int
-  customer   Customer @relation(fields: [customerid], references: [customerid])
+  customer   Customer    @relation(fields: [customerid], references: [customerid])
+  OrderItem  OrderItem[]
 
   @@unique([orderid, customerid], name: "OrderIdentifier")
   @@map("orders")
@@ -56,8 +82,9 @@ model Material {
   price                 Int
   color                 String
   stock                 Int
-  materitype            String
+  materialtype          String
   printerscompatibility PrinterMaterialcompatibility[]
+  OrderItem             OrderItem[]
 
   @@map("material")
 }
