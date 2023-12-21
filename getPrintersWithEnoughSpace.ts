@@ -23,6 +23,7 @@ export async function getPrinters(prisma:PrismaClient, product: Product, mat: Ma
                         gte: product.sizez
                     },
                     AND: {
+                        
                         materialcompatible: {
                             some: {
                                 materialid: {

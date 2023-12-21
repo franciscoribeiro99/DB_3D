@@ -91,7 +91,7 @@ async function main() {
 	const quantity = parseInt(await inter.question("How many of them would you like ? \n"))
 	const material = await pickMaterial()
 	const data = {
-		orderid: 150,
+		orderid: 152,
 		customerid: customer.customerid,
 		finalprice: 0,
 		statusid: 1,
